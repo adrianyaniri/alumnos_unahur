@@ -15,5 +15,4 @@
 
 
      npx sequelize-cli model:generate --name carrera --attributes nombre:string
-     npx sequelize db:migrate
 

@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
     .create({ nombre: req.body.nombre })
     .then(carrera => res.status(201).send({ id: carrera.id }))
     .catch(error => {
-      if (error == "SequelizeUniqueConstraintError: Validation error") {
+      if (error === "SequelizeUniqueConstraintError: Validation error") {
         res.status(400).send('Bad request: existe otra carrera con el mismo nombre')
       }
       else {
@@ -51,7 +51,7 @@ router.put("/:id", (req, res) => {
       .update({ nombre: req.body.nombre }, { fields: ["nombre"] })
       .then(() => res.sendStatus(200))
       .catch(error => {
-        if (error == "SequelizeUniqueConstraintError: Validation error") {
+        if (error === "SequelizeUniqueConstraintError: Validation error") {
           res.status(400).send('Bad request: existe otra carrera con el mismo nombre')
         }
         else {
