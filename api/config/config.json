@@ -1,10 +1,12 @@
 {
   "development": {
-    "username": "adrian",
-    "password": "1102",
+    "username": "admin",
+    "password": "password",
     "database": "api_v1",
     "host": "localhost",
     "dialect": "mariadb",
     "operatorsAliases": false
   }
 }
+
+
