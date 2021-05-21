@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const models = require("../models");
-const controllerCar = require('../controllers/carrera')
+const getCarrera  = require('../controllers/carrera.controller')
 
 
-router.get("/",controllerCar);
+router.get("/",getCarrera );
 
 router.post("/", (req, res) => {
   models.carrera
