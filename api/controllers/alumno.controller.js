@@ -8,17 +8,17 @@ const getAlumno = (req, res) => {
                 {
                     as:'Carrera_Relacionada',
                     model:models.carrera,
-                    attributes:['nombre']
+                    attributes:['nombre','id']
                 },
                 {
                     as:'Materia_Relacionada',
                     model: models.materia,
-                    attributes:['nombre']
+                    attributes:['nombre','id']
                 }
             ]
 
         })
-        .then(carreras => res.send(carreras))
+        .then(alumno => res.send(alumno))
         .catch(() => res.sendStatus(500));
 }
 const postAlumno = (req,res) =>{
@@ -39,4 +39,36 @@ const postAlumno = (req,res) =>{
         });
 }
 
-module.exports = { getAlumno, postAlumno }
+const findAlumno = (id, {onSuccess, onNotFound, onError}) => {
+    models.alumno
+        .findOne({
+            attributes: ["id", "nombre", "id_carrera","id_materia"],
+            where: {id}
+        })
+        .then(materia => (materia ? onSuccess(materia) : onNotFound()))
+        .catch(() => onError())
+}
+
+const getAlumnoId = (req,res) =>{
+    findAlumno(req.params.id, {
+        onSuccess: alumno => res.send(alumno),
+        onNotFound: () => res.sendStatus(404),
+        onError: () => res.sendStatus(500)
+    });
+}
+
+const deleteAlumno = (req,res) =>{
+    const onSuccess = alumno =>
+        alumno
+            .destroy()
+            .then( () => res.sendStatus(200))
+            .catch( () => res.sendStatus(500));
+    findAlumno(req.params.id, {
+        onSuccess,
+        onNotFound: () => res.sendStatus(400),
+        onError:() => res.sendStatus(500)
+     })
+}
+
+
+module.exports = { getAlumno, postAlumno, getAlumnoId, deleteAlumno }
