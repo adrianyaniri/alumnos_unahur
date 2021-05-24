@@ -29,6 +29,14 @@ const postAlumno = (req,res) =>{
             id_materia: req.body.id_materia,
             })
         .then(alumno => res.status(201).send({id:alumno.id}))
+        .catch(error => {
+            if (error === "SequelizeUniqueConstraintError: Validation error"){
+                res.status(400).send('Bad request: existe otro alumno con ese nombre')
+            }
+            else{
+                res.sendStatus(500)
+            }
+        });
 }
 
 module.exports = { getAlumno, postAlumno }
