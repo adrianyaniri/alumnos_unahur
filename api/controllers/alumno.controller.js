@@ -3,25 +3,32 @@ const models = require('../models');
 const getAlumno = (req, res) => {
     models.alumno
         .findAll({
-            attributes: ["id", "nombre","email","id_carrera","id_materia"]
+            attributes: ["id", "nombre","email","id_carrera","id_materia"],
+            include:[
+                {
+                    as:'Carrera_Relacionada',
+                    model:models.carrera,
+                    attributes:['nombre']
+                },
+                {
+                    as:'Materia_Relacionada',
+                    model: models.materia,
+                    attributes:['nombre']
+                }
+            ]
+
         })
         .then(carreras => res.send(carreras))
         .catch(() => res.sendStatus(500));
 }
-const postAlumno = (req, res) =>{
+const postAlumno = (req,res) =>{
     models.alumno
-        .create({
-            nombre: req.body.nombre,
+        .create({ nombre: req.body.nombre,
             email: req.body.email,
             id_carrera: req.body.id_carrera,
-            id_materia: req.body.id_materia
-        })
-        .then(alumno => res.sendStatus(201).send({ id: alumno.id }))
-        .catch(error => {
-            (error === "SequelizeUniqueConstraintError: Validation error"
-                ? res.sendStatus(400).send("'Bad request: existe otra carrera con el mismo nombre'")
-                : res.sendStatus(500) )
-        })
+            id_materia: req.body.id_materia,
+            })
+        .then(alumno => res.status(201).send({id:alumno.id}))
 }
 
 module.exports = { getAlumno, postAlumno }

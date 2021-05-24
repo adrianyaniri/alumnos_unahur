@@ -3,7 +3,7 @@ const models = require('../models')
 const getMateria = (req, res) => {
     models.materia
         .findAll({
-            attributes: ["id", "nombre", "id_carrera"],
+            attributes: ["id", "nombre"],
             include: [
                 {
                     as: 'Carrera-Relacionada',
@@ -19,7 +19,8 @@ const getMateria = (req, res) => {
 
 const postMateria = (req, res) =>{
     models.materia
-        .create({nombre: req.body.nombre, id_carrera: req.body.id_carrera})
+        .create({nombre: req.body.nombre,
+            id_carrera: req.body.id_carrera})
         .then(materia => res.status(201).send({id: materia.id}))
         .catch(error => {
             if (error === "SequelizeUniqueConstraintError: Validation error") {
