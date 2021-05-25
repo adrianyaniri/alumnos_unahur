@@ -50,6 +50,21 @@ const getCatedraId = (req, res) =>{
     })
 }
 
+const updateCatedra = (req, res) =>{
+    const onSuccess = catedra =>
+        catedra
+            .update(
+                { nombre: req.body.nombre, id_materia: req.body.id_materia},
+                { fields: ['nombre', 'id_materia']}
+            )
+            .then( () => res.sendStatus(200))
+            .catch( error =>{
+                (error === "SequelizeUniqueConstraintError: Validation error")
+                    ? res.sendStatus(400).send("Bad request ")
+                    : res.sendStatus(500)
+            })
+}
+
 const deleteCatedra = (req, res) =>{
     const onSuccess = catedra =>
         catedra

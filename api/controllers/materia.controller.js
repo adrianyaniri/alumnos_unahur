@@ -54,17 +54,14 @@ const getMateriaId = (req, res) =>{
 const updateMateria = (req, res) =>{
     const onSuccess = materia =>
         materia
-            .update({nombre: req.body.nombre}, {fields: ["nombre"]})
-            .update({id_carrera: req.body.id_carrera}, {fields: ["id_carrera"]})
+            .update({nombre: req.body.nombre, id_carrera: req.body.id_carrera}, { fields: ["nombre", "id_carrera"]})
             .then(() => res.sendStatus(200))
-            .catch((error => {
-                if (error === "SequelizeUniqueConstraintError: Validation error") {
-                    res.status(400).send("Bad reques: existe otra materia con ese nombre")
-                } else {
-                    console.log(`Erro al intentar actualiza DB ${error}`)
-                    res.sendStatus(500)
-                }
-            }));
+            .catch(error => {
+                (error === "SequelizeUniqueConstraintError: Validation error")
+                 ? res.status(400).send("Bad reques: existe otra materia con ese nombre")
+                 : res.sendStatus(500)
+
+            });
     findMateria(req.params.id, {
         onSuccess,
         onNotFound: () => res.sendStatus(404),
