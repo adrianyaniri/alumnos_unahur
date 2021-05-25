@@ -33,5 +33,34 @@ const postCatedra = (req, res) =>{
             }
         })
 }
+const findCatedra = (id, {onSuccess, onNotFound, onError}) => {
+    models.catedra
+        .findOne({
+            attributes: ["id", "nombre", "id_materia"],
+            where: {id}
+        })
+        .then(catedra => (catedra ? onSuccess(catedra) : onNotFound()))
+        .catch(() => onError())
+}
+const getCatedraId = (req, res) =>{
+    findCatedra(req.params.id, {
+        onSuccess: catedra => res.send(catedra),
+        onNotFound: () => res.sendStatus(404),
+        onError: () => res.sendStatus(500)
+    })
+}
 
-module.exports = { postCatedra ,getCatedra }
+const deleteCatedra = (req, res) =>{
+    const onSuccess = catedra =>
+        catedra
+            .destroy()
+            .then( () => res.sendStatus(200))
+            .catch( () => res.sendStatus(500));
+    findCatedra(req.params.id, {
+        onSuccess,
+        onNotFound: () => res.sendStatus(400),
+        onError: () => res.sendStatus(500)
+    })
+}
+
+module.exports = { postCatedra ,getCatedra , getCatedraId, deleteCatedra }
