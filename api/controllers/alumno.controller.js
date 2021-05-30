@@ -1,6 +1,10 @@
 const models = require('../models');
 
 const getAlumno = (req, res) => {
+
+    const paginaActual = parseInt(req.query.paginaActual)
+    const limite = parseInt(req.query.limite )
+
     models.alumno
         .findAll({
             attributes: ["id", "nombre","email","id_carrera","id_materia"],
@@ -15,7 +19,9 @@ const getAlumno = (req, res) => {
                     model: models.materia,
                     attributes:['nombre','id']
                 }
-            ]
+            ],
+            offset: (paginaActual -1) * limite,
+            limit: limite
 
         })
         .then(alumno => res.send(alumno))
