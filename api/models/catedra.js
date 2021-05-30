@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate:{
             isAlpha:true,
-            len:[3,250]
+            len:[4,250]
         }
     } ,
     id_materia:{
