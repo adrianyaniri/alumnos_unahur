@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define('carrera', {
-    nombre: DataTypes.STRING
+    nombre:{
+      type: DataTypes.STRING,
+      validate:{
+        isAlpha:true,
+        len: [2,250]
+      }
+    }
   }, {});
 };

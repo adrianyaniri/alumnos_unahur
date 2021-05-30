@@ -3,13 +3,35 @@ module.exports = (sequelize, DataTypes) => {
   const alumno = sequelize.define('alumno', {
     nombre: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate:{
-            isAlpha: true
+            isAlpha: true,
+            len:[3,250]
         }
     },
-    email: DataTypes.STRING,
-    id_carrera: DataTypes.INTEGER,
-    id_materia: DataTypes.INTEGER
+    email: {
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            isEmail: true
+        }
+    },
+    id_carrera: {
+        type: DataTypes.INTEGER,
+        allowNull:false,
+        validate:{
+            isInt:true,
+            min: 0
+        }
+    },
+    id_materia:{
+        type: DataTypes.INTEGER,
+        allowNull:false,
+        validate:{
+            isInt:true,
+            min:0
+        }
+    },
   }, {});
   alumno.associate = function(models) {
 

@@ -1,8 +1,22 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const catedra = sequelize.define('catedra', {
-    nombre: DataTypes.STRING,
-    id_materia: DataTypes.INTEGER
+    nombre:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            isAlpha:true,
+            len:[3,250]
+        }
+    } ,
+    id_materia:{
+        type:DataTypes.INTEGER,
+        defaultValue: 0,
+        validate:{
+            isInt: true,
+            min:0
+        }
+    },
   }, {});
   catedra.associate = function(models) {
 
