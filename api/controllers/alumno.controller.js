@@ -63,29 +63,26 @@ const getAlumnoId = (req,res) =>{
     });
 }
 
-const updateAlumno = (res,req) =>{
+const updateAlumno = (res,req) => {
     const onSuccess = alumno =>
         alumno
-            .update(
-                {
-                    nombre:req.body.nombre ,
-                    id_carrera:req.body.id_carrera,
-                    id_materia:req.body.id_materia
-                },
-                {
-                    fields : ["nombre","id_carrera","id_materia"]
-                })
-            .then( () => res.sendStatus(200))
+            .update({ nombre: req.body.nombre} ,{ fields: ["nombre"]})
+            .then( ()=> res.sendStatus(200))
             .catch( error => {
-                (error === "SequelizeUniqueConstraintError: Validation error" )
-                    ? res.sendStatus(400).send("Bad request")
-                    : res.sendStatus(500)
+                if (error ==="SequelizeUniqueConstraintError: Validation error" ){
+                    res.status(400).send('error no existe id')
+
+                }
+                else {
+                    console.log(`error al actualizar la base de datos: ${error}`)
+                    res.sendStatus(500)
+                }
             });
     findAlumno(req.params.id, {
         onSuccess,
-        onError: () => req.sendStatus(500),
-        onNotFound: () => req.sendStatus(404)
-    })
+        onNotFound: () => res.sendStatus(404),
+        onError: () => res.sendStatus(500)
+    });
 }
 
 const deleteAlumno = (req,res) =>{

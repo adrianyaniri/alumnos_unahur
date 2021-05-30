@@ -1,6 +1,10 @@
 const models = require('../models');
 
 const getCatedra = (req, res) =>{
+
+    const paginaActual = parseInt(req.query.paginaActual)
+    const limite = parseInt(req.query.limite )
+
     models.catedra
         .findAll({
             attributes: ['id','nombre','id_materia'],
@@ -10,7 +14,9 @@ const getCatedra = (req, res) =>{
                     model:models.materia,
                     attributes: ['id','nombre']
                 }
-            ]
+            ],
+            offset:(paginaActual - 1) * limite,
+            limit: limite
         })
         .then(catedra => res.send(catedra))
         .catch( () => res.sendStatus(500));
@@ -62,7 +68,12 @@ const updateCatedra = (req, res) =>{
                 (error === "SequelizeUniqueConstraintError: Validation error")
                     ? res.sendStatus(400).send("Bad request ")
                     : res.sendStatus(500)
-            })
+            });
+    findCatedra(req.params.id,{
+        onSuccess,
+        onNotFound: () => res.sendStatus(404),
+        onError:() => res.sendStatus(500)
+    });
 }
 
 const deleteCatedra = (req, res) =>{
@@ -78,4 +89,4 @@ const deleteCatedra = (req, res) =>{
     })
 }
 
-module.exports = { postCatedra ,getCatedra , getCatedraId, deleteCatedra }
+module.exports = { postCatedra ,getCatedra , getCatedraId, deleteCatedra ,updateCatedra }
