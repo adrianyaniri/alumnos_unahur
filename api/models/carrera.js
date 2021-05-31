@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     nombre:{
       type: DataTypes.STRING,
       validate:{
-        isAlpha:true,
+        is:"[a-z] ",
         len: [2,250]
       }
     }
