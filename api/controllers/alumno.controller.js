@@ -7,7 +7,7 @@ const getAlumno = (req, res) => {
 
     models.alumno
         .findAll({
-            attributes: ["id", "nombre","email","id_carrera","id_materia"],
+            attributes: ["id", "nombre","email","id_carrera","id_materia",'password'],
             include:[
                 {
                     as:'Carrera_Relacionada',
@@ -27,10 +27,12 @@ const getAlumno = (req, res) => {
         .then(alumno => res.send(alumno))
         .catch(() => res.sendStatus(500));
 }
+
 const postAlumno = (req,res) =>{
     models.alumno
         .create({ nombre: req.body.nombre,
             email: req.body.email,
+            password: req.body.password,
             id_carrera: req.body.id_carrera,
             id_materia: req.body.id_materia,
             })
@@ -66,7 +68,13 @@ const getAlumnoId = (req,res) =>{
 const updateAlumno = (res,req) => {
     const onSuccess = alumno =>
         alumno
-            .update({ nombre: req.body.nombre} ,{ fields: ["nombre"]})
+            .update(
+                {
+                    nombre: req.body.nombre,
+                    password: req.body.password
+                } ,
+                { fields: ["nombre","password"]
+                })
             .then( ()=> res.sendStatus(200))
             .catch( error => {
                 if (error ==="SequelizeUniqueConstraintError: Validation error" ){

@@ -16,6 +16,13 @@ module.exports = (sequelize, DataTypes) => {
             isEmail: true
         }
     },
+    password:{
+        type:DataTypes.STRING,
+        validate:{
+            isAlphanumeric: true
+        }
+
+    },
     id_carrera: {
         type: DataTypes.INTEGER,
         allowNull:false,
