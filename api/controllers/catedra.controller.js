@@ -2,8 +2,8 @@ const models = require('../models');
 
 const getCatedra = (req, res) =>{
 
-    const paginaActual = parseInt(req.query.paginaActual)
-    const limite = parseInt(req.query.limite )
+    let page = parseInt(req.query.page);
+    let limit = parseInt(req.query.limit);
 
     models.catedra
         .findAll({
@@ -15,8 +15,8 @@ const getCatedra = (req, res) =>{
                     attributes: ['id','nombre']
                 }
             ],
-            offset:(paginaActual - 1) * limite,
-            limit: limite
+            offset:(page - 1) * limit,
+            limit: limit
         })
         .then(catedra => res.send(catedra))
         .catch( () => res.sendStatus(500));

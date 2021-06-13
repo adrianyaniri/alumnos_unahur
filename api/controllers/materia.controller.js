@@ -1,8 +1,9 @@
-const models = require('../models')
+const models = require('../models');
 
 const getMateria = (req, res) => {
-    const paginaActual = parseInt(req.query.paginaActual)
-    const limite = parseInt(req.query.limite )
+
+    let page = parseInt(req.query.page);
+    let limit = parseInt(req.query.limit);
 
     models.materia
         .findAll({
@@ -15,8 +16,8 @@ const getMateria = (req, res) => {
                         ["id", "nombre"]
                 }
             ],
-            offset: (paginaActual -1) * limite,
-            limit: limite
+            offset: (page -1) * limit,
+            limit: limit
         })
         .then(materias => res.send(materias))
         .catch(() => res.sendStatus(500));

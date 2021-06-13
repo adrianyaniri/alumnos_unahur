@@ -1,15 +1,15 @@
-const models = require('../models')
+const models = require('../models');
 
 const getCarrera = (req, res) => {
 
-    const paginaActual = parseInt(req.query.paginaActual)
-    const limite = parseInt(req.query.limite )
+    let page = parseInt(req.query.page);
+    let limit = parseInt(req.query.limit);
 
      models.carrera
         .findAll({
             attributes: ["id", "nombre"],
-            offset: (limite - 1) * limite,
-            limit: limite
+            offset: (page  - 1) * limit,
+            limit: limit
         })
         .then(carreras => res.send(carreras))
         .catch(() => res.sendStatus(500));
