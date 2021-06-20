@@ -8,7 +8,7 @@ const getCarrera = (req, res) => {
      models.carrera
         .findAll({
             attributes: ["id", "nombre"],
-            offset: (limite - 1) * limite,
+            offset: (paginaActual - 1) * limite,
             limit: limite
         })
         .then(carreras => res.send(carreras))
