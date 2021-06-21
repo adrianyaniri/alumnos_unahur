@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getCarrera,postCarrera,getCarreraId , updateCarrera,deleteCarrera }= require('../controllers/carrera.controller')
+const { getCarrera,postCarrera,getCarreraId , updateCarrera,deleteCarrera } = require('../controllers/carrera.controller')
 
 router.get("/",getCarrera);
 router.post("/",postCarrera);

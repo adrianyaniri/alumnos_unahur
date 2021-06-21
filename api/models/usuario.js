@@ -5,12 +5,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull:false,
       validate:{
-        isAlpha:true
+        isAlpha:{
+          msg:'el nombre solo contiene letras'
+        },
+        len:{
+          args:[2, 255],
+          msg:'el nombre tiene que tener minimo 2 letras'
+        }
       }
     },
     password:{
       type:DataTypes.STRING,
-      allowNull:false
+      allowNull:false,
+      validate:{
+        len: [4,255]
+      }
     },
     email:{
       type:DataTypes.STRING,

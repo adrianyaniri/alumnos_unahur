@@ -30,7 +30,8 @@ const getAlumno = (req, res) => {
 
 const postAlumno = (req,res) =>{
     models.alumno
-        .create({ nombre: req.body.nombre,
+        .create({
+            nombre: req.body.nombre,
             email: req.body.email,
             password: req.body.password,
             id_carrera: req.body.id_carrera,

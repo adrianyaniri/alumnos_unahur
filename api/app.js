@@ -7,8 +7,8 @@ const carrerasRouter = require('./routes/carrera');
 const materiasRouter = require('./routes/materia');
 const alumnoRouter = require('./routes/alumno');
 const profesorRoouter = require('./routes/catedra')
+const loginUpRouter = require('./routes/login');
 const loginIn = require('./routes/login')
-
 
 var app = express();
 
@@ -27,7 +27,9 @@ app.use('/car',carrerasRouter);
 app.use('/mat',materiasRouter);
 app.use('/alum',alumnoRouter);
 app.use('/cat',profesorRoouter);
-app.use('/login',loginIn)
+app.use('/login',loginUpRouter);
+app.use('/login', loginIn)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
