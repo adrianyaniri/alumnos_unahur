@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull:false,
         validate:{
-            isAlpha:true,
+            is:"[a-z] ",
             len:[2,250]
         }
     },
