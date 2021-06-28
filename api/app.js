@@ -6,9 +6,9 @@ const logger = require('morgan');
 const carrerasRouter = require('./routes/carrera');
 const materiasRouter = require('./routes/materia');
 const alumnoRouter = require('./routes/alumno');
-const profesorRoouter = require('./routes/catedra')
-const loginUpRouter = require('./routes/login');
-const loginIn = require('./routes/login')
+const profesorRoouter = require('./routes/profesor');
+const signIn  = require('./routes/autorizacion');
+const singUp  = require('./routes/autorizacion');
 
 const app = express();
 
@@ -26,9 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/car',carrerasRouter);
 app.use('/mat',materiasRouter);
 app.use('/alum',alumnoRouter);
-app.use('/cat',profesorRoouter);
-app.use('/login',loginUpRouter);
-app.use('/login', loginIn)
+app.use('/prof',profesorRoouter);
+app.use('/auth',signIn);
+app.use('/auth',singUp);
+
 
 
 // catch 404 and forward to error handler

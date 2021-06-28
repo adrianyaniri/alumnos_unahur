@@ -5,27 +5,29 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-            is:"[a-z] ",
-            len:[3,250]
+            isAlpha: true,
+            len:[4,250]
         }
     },
+     apellido:{
+        type: DataTypes.STRING,
+         allowNull: true,
+         validate:{
+            isAlpha:true,
+             len:[4,250]
+         }
+     },
     email: {
         type:DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate:{
             isEmail: true
         }
     },
-    password:{
-        type:DataTypes.STRING,
-        validate:{
-            isAlphanumeric: true
-        }
 
-    },
     id_carrera: {
         type: DataTypes.INTEGER,
-        allowNull:false,
+        allowNull:true,
         validate:{
             isInt:true,
             min: 0
@@ -33,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     id_materia:{
         type: DataTypes.INTEGER,
-        allowNull:false,
+        allowNull:true,
         validate:{
             isInt:true,
             min:0

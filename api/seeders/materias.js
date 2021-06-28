@@ -1,39 +1,37 @@
 'use strict';
-
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        let carreras = [
+        let materias = [
             {
-                nombre: 'Ingenieria en Electronica',
+                nombre: 'Intro a la programacion',
+                id_carrera: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                nombre: 'Tecnicatura Universitaria en Diseño Industrial',
+                nombre: 'Objetos 1 ',
+                id_carrera: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                nombre: 'Licenciatura en Biotecnologia',
+                nombre: 'Estrategia de Persistencia',
+                id_carrera: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
-                nombre: 'Licenciatura en Matematicas',
+                nombre: 'Matematica 3',
+                id_carrera: 3,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
-            {
-                nombre: 'Profesorado Educacion Fisica',
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            }
         ]
-        await queryInterface.bulkInsert('carreras', carreras, {});
+        await queryInterface.bulkInsert('materia', materias, {});
     },
 
     down: async (queryInterface, Sequelize) => {
 
-        await queryInterface.bulkDelete('carreras', null, {});
+        await queryInterface.bulkDelete('materia', null, {});
     }
 };

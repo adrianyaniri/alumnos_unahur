@@ -1,11 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const catedra = sequelize.define('catedra', {
+  const profesor = sequelize.define('profesor', {
     nombre:{
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
-            is:"[a-z] ",
+            isAlpha:true,
             len:[4,250]
         }
     } ,
@@ -18,13 +18,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
   }, {});
-  catedra.associate = function(models) {
+  profesor.associate = function(models) {
 
-    catedra.belongsTo(models.materia,
+    profesor.belongsTo(models.materia,
         {
           as: 'Materia_Relacionada',
           foreignKey: 'id_materia'
         })
   };
-  return catedra;
+  return profesor;
 };

@@ -32,8 +32,8 @@ const postAlumno = (req,res) =>{
     models.alumno
         .create({
             nombre: req.body.nombre,
+            apellido:req.body.apellido,
             email: req.body.email,
-            password: req.body.password,
             id_carrera: req.body.id_carrera,
             id_materia: req.body.id_materia,
             })
@@ -43,6 +43,7 @@ const postAlumno = (req,res) =>{
                 res.status(400).send('Bad request: existe otro alumno con ese nombre')
             }
             else{
+                console.log(`Error al intentar insertar en la base de datos: ${error}`)
                 res.sendStatus(500)
             }
         });
@@ -72,9 +73,11 @@ const updateAlumno = (res,req) => {
             .update(
                 {
                     nombre: req.body.nombre,
-                    password: req.body.password
+                    apellido:req.body.apellido,
+                    id_materia: req.body.id_materia,
+                    id_carrera: req.body.id_carrera
                 } ,
-                { fields: ["nombre","password"]
+                { fields: ["nombre","apellido","id_materia",'id_carrera']
                 })
             .then( ()=> res.sendStatus(200))
             .catch( error => {
@@ -106,6 +109,5 @@ const deleteAlumno = (req,res) =>{
         onError:() => res.sendStatus(500)
      })
 }
-
 
 module.exports = { getAlumno, postAlumno, getAlumnoId, deleteAlumno , updateAlumno }

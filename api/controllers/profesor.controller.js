@@ -1,11 +1,11 @@
 const models = require('../models');
 
-const getCatedra = (req, res) =>{
+const getProfesor = (req, res) =>{
 
     let page = parseInt(req.query.page);
     let limit = parseInt(req.query.limit);
 
-    models.catedra
+    models.profesor
         .findAll({
             attributes: ['id','nombre','id_materia'],
             include:[
@@ -18,18 +18,18 @@ const getCatedra = (req, res) =>{
             offset:(page - 1) * limit,
             limit: limit
         })
-        .then(catedra => res.send(catedra))
+        .then(profesor => res.send(profesor))
         .catch( () => res.sendStatus(500));
 }
 
 
-const postCatedra = (req, res) =>{
-    models.catedra
+const postProfesor = (req, res) =>{
+    models.profesor
         .create({
             nombre: req.body.nombre,
             id_materia:req.body.id_materia
         })
-        .then(catedra => res.status(200).send({ id:catedra.id }))
+        .then(profesor => res.status(200).send({ id:profesor.id }))
         .catch(error =>{
             if(error === "SequelizeUniqueConstraintError: Validation error"){
                 res.send(400).send("Bad request")
@@ -39,26 +39,26 @@ const postCatedra = (req, res) =>{
             }
         })
 }
-const findCatedra = (id, {onSuccess, onNotFound, onError}) => {
-    models.catedra
+const findProfesor = (id, {onSuccess, onNotFound, onError}) => {
+    models.profesor
         .findOne({
             attributes: ["id", "nombre", "id_materia"],
             where: {id}
         })
-        .then(catedra => (catedra ? onSuccess(catedra) : onNotFound()))
+        .then(profesor => (profesor ? onSuccess(profesor) : onNotFound()))
         .catch(() => onError())
 }
-const getCatedraId = (req, res) =>{
-    findCatedra(req.params.id, {
-        onSuccess: catedra => res.send(catedra),
+const getProfesorId = (req, res) =>{
+    findProfesor(req.params.id, {
+        onSuccess: profesor => res.send(profesor),
         onNotFound: () => res.sendStatus(404),
         onError: () => res.sendStatus(500)
     })
 }
 
-const updateCatedra = (req, res) =>{
-    const onSuccess = catedra =>
-        catedra
+const updateProfesor = (req, res) =>{
+    const onSuccess = profesor =>
+        profesor
             .update(
                 { nombre: req.body.nombre, id_materia: req.body.id_materia},
                 { fields: ['nombre', 'id_materia']}
@@ -69,24 +69,24 @@ const updateCatedra = (req, res) =>{
                     ? res.sendStatus(400).send("Bad request ")
                     : res.sendStatus(500)
             });
-    findCatedra(req.params.id,{
+    findProfesor(req.params.id,{
         onSuccess,
         onNotFound: () => res.sendStatus(404),
         onError:() => res.sendStatus(500)
     });
 }
 
-const deleteCatedra = (req, res) =>{
-    const onSuccess = catedra =>
-        catedra
+const deleteProfesor = (req, res) =>{
+    const onSuccess = profesor =>
+        profesor
             .destroy()
             .then( () => res.sendStatus(200))
             .catch( () => res.sendStatus(500));
-    findCatedra(req.params.id, {
+    findProfesor(req.params.id, {
         onSuccess,
         onNotFound: () => res.sendStatus(400),
         onError: () => res.sendStatus(500)
     })
 }
 
-module.exports = { postCatedra ,getCatedra , getCatedraId, deleteCatedra ,updateCatedra }
+module.exports = { postProfesor ,getProfesor , getProfesorId,deleteProfesor , updateProfesor }
