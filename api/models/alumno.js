@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate:{
             isAlpha: true,
-            len:[4,250]
+            len:[2,250]
         }
     },
      apellido:{
         type: DataTypes.STRING,
-         allowNull: true,
+         allowNull: false,
          validate:{
             isAlpha:true,
              len:[4,250]

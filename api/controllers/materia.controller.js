@@ -60,11 +60,16 @@ const getMateriaId = (req, res) =>{
 const updateMateria = (req, res) =>{
     const onSuccess = materia =>
         materia
-            .update({nombre: req.body.nombre, id_carrera: req.body.id_carrera}, { fields: ["nombre", "id_carrera"]})
+            .update({
+                nombre: req.body.nombre,
+                id_carrera: req.body.id_carrera},
+                {
+                    fields: ["nombre", "id_carrera"]
+                })
             .then(() => res.sendStatus(200))
             .catch(error => {
                 (error === "SequelizeUniqueConstraintError: Validation error")
-                 ? res.status(400).send("Bad reques: existe otra materia con ese nombre")
+                 ? res.status(400).send("error no existe id")
                  : res.sendStatus(500)
 
             });

@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const auth = require('../middlewares/auth');
 const {getMateria,postMateria, getMateriaId, updateMateria, deleteMateria } = require('../controllers/materia.controller')
 
 router.get("/", getMateria);
-router.post("/", postMateria);
 router.get("/:id", getMateriaId);
-router.put("/:id",updateMateria );
-router.delete("/:id", deleteMateria);
+router.post("/",auth, postMateria);
+router.put("/:id",auth,updateMateria );
+router.delete("/:id",auth, deleteMateria);
 
 
 module.exports = router;

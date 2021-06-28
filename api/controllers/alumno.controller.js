@@ -7,7 +7,7 @@ const getAlumno = (req, res) => {
 
     models.alumno
         .findAll({
-            attributes: ["id", "nombre","email","id_carrera","id_materia",'password'],
+            attributes: ["id", "nombre","email","id_carrera","id_materia"],
             include:[
                 {
                     as:'Carrera_Relacionada',
@@ -52,7 +52,7 @@ const postAlumno = (req,res) =>{
 const findAlumno = (id, {onSuccess, onNotFound, onError}) => {
     models.alumno
         .findOne({
-            attributes: ["id", "nombre", "id_carrera","id_materia"],
+            attributes: ["id", "nombre","apellido", "id_carrera","id_materia"],
             where: {id}
         })
         .then(materia => (materia ? onSuccess(materia) : onNotFound()))
@@ -74,10 +74,11 @@ const updateAlumno = (res,req) => {
                 {
                     nombre: req.body.nombre,
                     apellido:req.body.apellido,
+                    email: req.body.email,
                     id_materia: req.body.id_materia,
                     id_carrera: req.body.id_carrera
                 } ,
-                { fields: ["nombre","apellido","id_materia",'id_carrera']
+                { fields: ["nombre","apellido","email","id_materia",'id_carrera']
                 })
             .then( ()=> res.sendStatus(200))
             .catch( error => {
