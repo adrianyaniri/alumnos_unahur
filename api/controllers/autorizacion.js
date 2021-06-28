@@ -1,5 +1,6 @@
 const models = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const authConfig = require('../config/authConfig');
 
 // Login de usuario
@@ -13,9 +14,20 @@ const signIn = (req, res) => {
         }
     })
         .then(usuario => {
-            if(! usuario) { res.status(404).json('usuario no encontrado ')}
+            if( !usuario ) { res.status(404).json('usuario no encontrado ')}
             else {
-                bcrypt.compareSync( password, usuario.password ) ? res.json(password) : res.status(401).json('contraseña invalida')
+                if (bcrypt.compareSync( password, usuario.password )){
+
+                    let token = jwt.sign({usuario: usuario}, authConfig.secret, {
+                        expiresIn: authConfig.expire
+                        });
+                    res.json({
+                        token
+                    })
+                }
+                else {
+                    res.status(404).json({ msg: 'contrasseña invalida ' })
+                }
             }
 
         })
@@ -35,9 +47,13 @@ const signUp = (req, res) => {
             email: req.body.email
         })
         .then( async usuario => {
+
+            let token = jwt.sign({ usuario: usuario }, "secret",{
+                expiresIn: "1d"
+            })
             res.status(201).json({
-                id: usuario.id,
-                nombre: usuario.name
+                nombre: usuario.name,
+                token: token
             })
         })
         .catch(err => {
