@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "a5209259-1603-4cd0-af9a-4063cd1bae3c",
+		"name": "api_alumnos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "alumnos",
+			"item": [
+				{
+					"name": "get/All/paginacion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/car?page=1&limit=3",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"car"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/car/10",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"car",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/alum/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"alum",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Adrian\",\n    \"password\": \"1234\",\n    \"email\": \"adr@gmail.com.ar\",\n    \"id_carrera\": 6,\n    \"id_materia\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/alum/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"alum",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Adrian\",\n    \"password\": \"1234\",\n    \"email\": \"adr@gmail.com.ar\",\n    \"id_carrera\": 6,\n    \"id_materia\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/alum/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"alum",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "carrera",
+			"item": [
+				{
+					"name": "get/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/car/10",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"car",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put car",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Tecnicatura en informatica\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/car/8",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"car",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete car",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Matematicas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/car/9",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"car",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post/ car",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Tecnicatura en Informatica\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/car",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"car"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/paginacion/car",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Alberto Martin\",\n    \"email\": \"alberto@gmail.com\",\n    \"password\": \"alberto\",\n    \"id_carrera\": 6,\n    \"id_materia\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/car?page=1&limit=2",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"car"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "materia",
+			"item": [
+				{
+					"name": "get/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/mat?page=1&limit=5",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mat"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/mat/9",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mat",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/mat/9",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mat",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put/id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Interface de Usuarios\"  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/mat/10",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"mat",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "catedra",
+			"item": [
+				{
+					"name": "get/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post/Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Carlos\",\n    \"id_materia\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/cat",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"cat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post/Id Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Alberto\",\n    \"id_materia\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/cat/7",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"cat",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

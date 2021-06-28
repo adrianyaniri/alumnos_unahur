@@ -4,7 +4,24 @@ const authConfig = require('../config/authConfig');
 
 // Login de usuario
 const signIn = (req, res) => {
-    res.json('signIN')
+
+    let { email, password } = req.body;
+
+    models.usuario.findOne({
+        where:{
+            email: email
+        }
+    })
+        .then(usuario => {
+            if(! usuario) { res.status(404).json('usuario no encontrado ')}
+            else {
+                bcrypt.compareSync( password, usuario.password ) ? res.json(password) : res.status(401).json('contraseña invalida')
+            }
+
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
 }
 
 const signUp = (req, res) => {
@@ -18,12 +35,9 @@ const signUp = (req, res) => {
             email: req.body.email
         })
         .then( async usuario => {
-
-           let token = "token"
-            console.log(token)
             res.status(201).json({
-                nombre: usuario.name,
-                password: password
+                id: usuario.id,
+                nombre: usuario.name
             })
         })
         .catch(err => {
