@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     },
      apellido:{
         type: DataTypes.STRING,
-         allowNull: false,
+         allowNull:false,
          validate:{
             isAlpha:true,
              len:[4,250]
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
      },
     email: {
         type:DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
         validate:{
             isEmail: true
         }
@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
 
     id_carrera: {
         type: DataTypes.INTEGER,
-        allowNull:true,
+        defaultValue: 0,
+        allowNull:false,
         validate:{
             isInt:true,
             min: 0
@@ -35,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     id_materia:{
         type: DataTypes.INTEGER,
-        allowNull:true,
+        allowNull:false,
+        defaultValue: 0,
         validate:{
             isInt:true,
             min:0
