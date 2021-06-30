@@ -3,6 +3,16 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const authConfig = require('../config/authConfig');
 
+// encripta la contraseña
+const encriptar = password => bcrypt.hashSync(password, authConfig.rounds);
+
+//Genera el token que se le muestra al usuario
+const generarToken = usuario =>
+    jwt.sign(
+        {id: usuario.id ,email: usuario.email}, authConfig.secret,{
+            expiresIn: authConfig.expire
+        })
+
 // Login de usuario
 const signIn = (req, res) => {
 
@@ -38,7 +48,7 @@ const signIn = (req, res) => {
 
 const signUp = (req, res) => {
 
-    let password = bcrypt.hashSync(req.body.password, authConfig.rounds)
+    let password = encriptar( req.body.password )
 
     models.usuario
         .create({
@@ -46,14 +56,10 @@ const signUp = (req, res) => {
             password: password,
             email: req.body.email
         })
-        .then( async usuario => {
-
-            let token = jwt.sign({ usuario: usuario }, "secret",{
-                expiresIn: "1d"
-            })
+        .then(usuario => {
             res.status(201).json({
                 nombre: usuario.name,
-                token: token
+                token: generarToken(usuario)
             })
         })
         .catch(err => {
