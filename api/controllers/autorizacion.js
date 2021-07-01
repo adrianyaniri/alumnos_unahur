@@ -54,6 +54,7 @@ const signUp = (req, res) => {
         .create({
             name: req.body.nombre,
             password: password,
+            role: req.body.role,
             email: req.body.email
         })
         .then(usuario => {

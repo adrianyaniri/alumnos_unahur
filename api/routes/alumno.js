@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth');
 const {getAlumno, postAlumno, getAlumnoId,deleteAlumno, updateAlumno } = require('../controllers/alumno.controller')
 
 
-router.get('/',getAlumno);
+router.get('/',auth,getAlumno);
 router.get('/:id',getAlumnoId);
 router.post('/',auth, postAlumno);
 router.delete('/:id', auth,deleteAlumno );

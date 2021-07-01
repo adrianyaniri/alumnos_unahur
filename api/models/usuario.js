@@ -27,11 +27,17 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         isEmail:true
       }
+    },
+    role:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'admin'
     }
   }, {
   });
-  usuario.associate = function(models) {
-    // associations can be defined here
+  usuario.associate = models => {
+    usuario.belongsToMany(models.Role,
+        {as:"role",through:'usuarios_roles', foreignKey: 'usuario_id' })
   };
   return usuario;
 };

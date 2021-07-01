@@ -86,8 +86,7 @@ const updateAlumno = (res,req) => {
                     res.status(400).send('error no existe id')
                 }
                 else {
-                    console.log(`error al actualizar la base de datos: ${error}`)
-                    res.sendStatus(500)
+                    res.sendStatus(500).send(`error al actualizar la base de datos: ${error}`)
                 }
             });
     findAlumno(req.params.id, {
